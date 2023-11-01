@@ -13,7 +13,7 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
 
-  final WeatherService _weatherService = WeatherService(apiKey: 'cc55e809e04874a1b39736b293cb7b21');
+  final WeatherService _weatherService = WeatherService(apiKey: 'c5a18daed22e4415bd050640230111');
   Weather? _weather;
 
   final TextEditingController _placeController = TextEditingController();
@@ -91,7 +91,7 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(242, 239, 239, 1),
+      backgroundColor:  Color.fromRGBO(242, 239, 239, (_weather != null && _weather!.isDay) ? 1: 0),
       body: Column(
         mainAxisSize: MainAxisSize.min,
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -104,8 +104,8 @@ class _WeatherPageState extends State<WeatherPage> {
                 Expanded(
                   child: TextField(
                         controller: _placeController,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        style: TextStyle(
+                            color: _weather != null && _weather!.isDay ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 16
                         ),
@@ -115,12 +115,32 @@ class _WeatherPageState extends State<WeatherPage> {
                             fetchWeatherForSearch(_placeController.text.trim());
                           }
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Search for a place',
                           hintStyle: TextStyle(
-                            color: Colors.grey,
+                            color: _weather != null && _weather!.isDay ? Colors.grey : Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 16
+                          ),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: _weather != null && _weather!.isDay ? Colors.black : Colors.white
+                            )
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: _weather != null && _weather!.isDay ? Colors.black : Colors.white
+                              )
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: _weather != null && _weather!.isDay ? Colors.black : Colors.white
+                              )
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: _weather != null && _weather!.isDay ? Colors.black : Colors.white
+                              )
                           ),
                         ),
                   ),
@@ -132,7 +152,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     }
                   },
                   child: SizedBox(
-                    child: Lottie.asset('assets/searchIcon.json', width: 100),
+                    child:_weather != null && _weather!.isDay ? Lottie.asset('assets/searchIcon.json', width: 100,) : Lottie.asset('assets/nightSearchIcon.json', width: 100,),
                   ),
                 ),
                 GestureDetector(
@@ -167,7 +187,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 children: [
                   Column(
                     children: [
-                      Lottie.asset('assets/locationIcon.json', width: 30),
+                      _weather != null && _weather!.isDay ? Lottie.asset('assets/locationIcon.json', width: 30) : Lottie.asset('assets/nightLocationIcon.json', width: 30),
                       Text((_weather?.city ?? 'loading city..').toUpperCase(),
                         style: const TextStyle(
                           color: Colors.grey,

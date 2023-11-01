@@ -8,13 +8,15 @@ import '../models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherService {
-  static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+  static const BASE_URL = 'https://api.weatherapi.com/v1/current.json';
+  // static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeatherService({required this.apiKey});
 
   Future<Weather> getWeather(String cityName) async {
-    final response = await http.get(Uri.parse('$BASE_URL?q=$cityName&units=metric&appid=$apiKey'));
+    // final response = await http.get(Uri.parse('$BASE_URL?q=$cityName&units=metric&appid=$apiKey'));
+    final response = await http.get(Uri.parse('$BASE_URL?key=$apiKey&q=$cityName&aqi=no'));
 
     if(response.statusCode == 200){
       debugPrint(response.body);
