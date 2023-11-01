@@ -60,17 +60,27 @@ class _WeatherPageState extends State<WeatherPage> {
 
     switch(mainCondition.toLowerCase()){
       case 'clouds':
+      case 'partly cloudy':
+      case 'overcast':
       case 'mist':
       case 'smoke':
       case 'haze':
       case 'dust':
       case 'fog':
+      case 'freezing fog':
         return 'assets/cloud.json';
       case 'rain':
+      case 'patchy rain nearby':
       case 'drizzle':
+      case 'patchy light drizzle':
+      case 'light drizzle':
       case 'shower rain':
+      case 'patchy snow nearby':
+      case 'blowing snow':
+      case 'patchy freezing drizzle nearby':
         return 'assets/rain.json';
       case 'thunderstorm':
+      case 'thundery outbreaks in nearby':
         return 'assets/thunder.json';
       case 'clear':
         return 'assets/sunny.json';
