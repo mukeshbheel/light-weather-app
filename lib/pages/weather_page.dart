@@ -57,6 +57,19 @@ class _WeatherPageState extends State<WeatherPage> {
 
   String getWeatherAnimation(String? mainCondition){
     if(mainCondition == null) return 'assets/sunny.json';
+    if(mainCondition.toLowerCase().contains('cloud')){
+      return 'assets/cloud.json';
+    }
+    if(mainCondition.toLowerCase().contains('rain')){
+      return 'assets/rain.json';
+    }
+    if(mainCondition.toLowerCase().contains('thunder')){
+      return 'assets/thunder.json';
+    }
+    if(mainCondition.toLowerCase().contains('snow')){
+      return 'assets/snow.json';
+    }
+
 
     switch(mainCondition.toLowerCase()){
       case 'clouds':
