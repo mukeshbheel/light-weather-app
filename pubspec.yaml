@@ -39,6 +39,8 @@ dependencies:
   geocoding:
   http:
   lottie:
+  gap:
+  intl:
 
 
 dev_dependencies:
